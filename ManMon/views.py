@@ -58,5 +58,25 @@ def history(request):
 
     return render(request, 'ManMon/history.html', {'account_list':account_list, 'money_sum':money_sum})
 
+def callInsertType(request):
+    return render(request,"ManMon/insertType.html",'')
 
+def saveType(request):
+    if(request.POST['choice'] == 'income' ):
+        try:        
+            save_type = request.POST['type']
+        except:
+            in_type = ""
+        else:
+            save_type = TypeIncome(type_income = save_type)
+            save_type.save()
+    if(request.POST['choice'] == 'payment' ):
+        try:
+            save_type = request.POST['type']
+        except:
+            save_type = ""
+        else:
+            save_type = TypePayment(type_payment = save_type)
+            save_type.save()
+    return render(request, "ManMon/saveType.html",{'save_type':save_type})
 

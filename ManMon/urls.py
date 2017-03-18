@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^accountInput$', views.callAccountInput, name="callAccountInput"),
     url(r'^saveAccount$', views.saveAccount, name="saveAccount"),
     url(r'^history$', views.history, name="history"),
+    url(r'^insertType$', views.callInsertType, name="insertType"),
+    url(r'^saveType', views.saveType, name="saveType"),
 
 ]
