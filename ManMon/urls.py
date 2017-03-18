@@ -10,5 +10,6 @@ urlpatterns = [
     url(r'^$', views.callMainPage, name="mainpage"),
     url(r'^accountInput$', views.callAccountInput, name="callAccountInput"),
     url(r'^saveAccount$', views.saveAccount, name="saveAccount"),
+    url(r'^history$', views.history, name="history"),
 
 ]
