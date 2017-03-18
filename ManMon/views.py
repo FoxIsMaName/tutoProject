@@ -11,6 +11,36 @@ def callMainPage(request):
     for account in account_list :
         remain_money += account.money
 
+    
     account_list = Account.objects.order_by('-pub_date')[:5]
+    for account in account_list :
+        if account.money < 0 :
+            money = account.money
+            account.money = (-1)*float(money)
+
     return render(request, 'ManMon/main.html',{'remain_money':remain_money,         
                   'account_list':account_list})
+
+def callAccountInput(request):
+    type_in_list = TypeIncome.objects.order_by('-type_income')
+    type_pay_list = TypePayment.objects.order_by('-type_payment')
+    print("1")
+    return render(request, 'ManMon/accountInput.html', {'type_in_list':type_in_list,'type_pay_list':type_pay_list})
+
+def saveAccount(request):
+    try:
+        note = request.POST['note']
+        money = request.POST['money']
+        type_note = request.POST['type']
+        date = request.POST['dmy']
+    except:
+        note = ""
+        money = ""
+        type_note = ""
+        date = ""
+    if(request.POST['choice'] == 'payment'):
+        money = (-1)*float(money)
+
+    ac = Account(note = note, money = money, type_note = type_note, pub_date = date)
+    ac.save()
+    return render(request, 'ManMon/saveAccount.html',{'note':note, 'money':money, 'type_note':type_note, 'date':date})
